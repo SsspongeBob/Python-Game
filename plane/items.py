@@ -1,7 +1,6 @@
 import pygame
 from pygame import Surface
 from typing import Union, Sequence, Tuple
-from actions import detect_to_move
 
 
 class Plane:

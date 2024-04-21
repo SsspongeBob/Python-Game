@@ -1,11 +1,11 @@
 import pygame
 from pygame import Rect
-from typing import Iterable, Tuple
+from typing import Iterable, Tuple, Literal
 
 
 # get the initial position
 def get_initial_position(rect: Rect):
-    """get the initial position
+    """get the initial position.\n
 
     Return:
         rect.center: the initial center of the item
@@ -28,9 +28,19 @@ def detect_to_move(surface_rect: Rect):
 
 # check if the item off the screen
 def check_for_outline(
-    initial_position: Iterable[Tuple[int, int]], rect: Iterable[Rect]
+    initial_position: Iterable[Tuple[int, int]],
+    rect: Iterable[Rect],
+    *,
+    type: Iterable[Literal["plane", "bullet"]],
 ):
-    for item in zip(initial_position, rect):
-        if item[1].top < 0:
-            # initial to the origin position
-            item[1].center = item[0]
+    """check if the items off the screen.\n
+
+    Args:
+        initial_position(Iterable[Tuple[int, int]]): position of each items.
+        rect(Iterable[Rect]): rectangle of each items.
+    """
+    for item in zip(initial_position, rect, type):
+        if item[2] == "bullet":
+            if item[1].top < 0:
+                # initial to the origin position
+                item[1].center = item[0]

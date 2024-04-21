@@ -25,8 +25,8 @@ bullet_rect = pygame.Rect(0, 0, 5, 15)
 bullet_rect.midbottom = plane.surface_rect.midtop
 bullet_initial_position = bullet_rect.center  # get the initial position
 pygame.draw.rect(window, "red", bullet_rect, border_radius=5)
-# set the default moving distance of bullet
-distance = 2
+# set the default moving speed of bullet
+speed = 2
 
 # render the items initialy
 pygame.display.flip()
@@ -44,10 +44,9 @@ while running:
     plane.rerender(window, plane.surface_rect)
 
     # bullet
-    check_for_outline([bullet_initial_position], [bullet_rect])
-    bullet_rect.move(0, -distance)
+    check_for_outline([bullet_initial_position], [bullet_rect], type=["bullet"])
+    bullet_rect = bullet_rect.move(0, -speed)
     pygame.draw.rect(window, "red", bullet_rect, border_radius=5)
-    bullet_rect.bottom -= distance
 
     # update the items
     pygame.display.update()
